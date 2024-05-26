@@ -1,0 +1,14 @@
+.fullscreen-heading {
+    font-size: 6vw; /* Adjust the font size based on the viewport width */
+    text-align: center; /* Center align the text */
+    margin-top: 0; /* Remove top margin for better alignment */
+}
+
+@media (max-width: 768px) {
+    .fullscreen-heading {
+        font-size: 8vw; /* Increase font size for smaller screens */
+    }
+}
+
+
+/* working */
