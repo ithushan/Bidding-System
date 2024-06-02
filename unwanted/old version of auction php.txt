@@ -1,0 +1,59 @@
+<!-- old version -->
+<!-- <div class="row">
+    <?php 
+        include("backend/conn.php");
+
+        // Combine the queries using JOIN
+        $sql = "SELECT p.*, a.end_date, a.price FROM products p 
+                JOIN auctionproducts a ON p.product_id = a.product_id 
+                WHERE p.admin_approve_status = 'approved'"; 
+
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)){ 
+                // Fetch only the first image from the directory
+                $dir = "uploads/sell/" . $row['seller_id'] . "/" . $row['title'] . "/";
+                $firstImage = '';
+                if (is_dir($dir)){
+                    $files = scandir($dir);
+                    foreach($files as $file) {
+                        if($file != '.' && $file != '..') {
+                            $firstImage = $dir . $file;
+                            break; // Break the loop after finding the first image
+                        }
+                    }
+                }
+
+                // Calculate remaining days
+                $todayDate = new DateTime();
+                $endDate = new DateTime($row['end_date']);
+                $remainingDays = $todayDate->diff($endDate)->format("%a");
+
+                // Display or process the data as needed
+                ?>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="<?php echo htmlspecialchars($firstImage); ?>" class="card-img-top mx-auto" style="object-fit: cover; width: 200px; height: 200px;" alt="Product Image">
+                        <div class="card-body">
+                            <h5 class="card-title" style="word-wrap: break-word; overflow: hidden; max-height: 60px; min-height:48px; text-align: justify; line-height: 24px;"><?php echo htmlspecialchars($row['title']); ?></h5>
+                            <h6 class="card-text">
+                                <small class="text-muted badge rounded-pill text-bg-success"><?php echo htmlspecialchars($remainingDays) . " Days more..."; ?></small>
+                            </h6>
+                            <h6 class="card-text"><small class="text-muted">Starting Amount: <?php echo htmlspecialchars($row['reserve_price']); ?></small></h6>
+                            <h6 class="card-text"><small class="text-muted">Last Bid Amount: <?php echo htmlspecialchars($row['price']); ?></small></h6>
+                            <a href="<?php echo 'viewProduct.php?id=' . urlencode($row['product_id']); ?>" class="btn btn-a">More details</a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+        } else {
+            echo "<div class='col-md-12'><p>No approved products found.</p></div>";
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+    ?>
+</div>
+ -->

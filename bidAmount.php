@@ -1,36 +1,36 @@
 <?php
 session_start();
 
-require 'vendor/autoload.php';
+// require 'vendor/autoload.php';
 
-    use Pusher\Pusher;
+//     use Pusher\Pusher;
     
-    $options = [
-        'cluster' => 'ap1',
-        'useTLS' => true
-    ];
-    $pusher = new Pusher(
-        '36bd53a61ebe20083542',
-        '1373c9a0db8e5e6e2259',
-        '1807141',
-        $options
-    );
+//     $options = [
+//         'cluster' => 'ap1',
+//         'useTLS' => true
+//     ];
+//     $pusher = new Pusher(
+//         '36bd53a61ebe20083542',
+//         '1373c9a0db8e5e6e2259',
+//         '1807141',
+//         $options
+//     );
     
-    // Function to send a notification
-   // Function to send a notification
-    function sendBidNotification($channel, $event, $data) {
-        global $pusher;
-        $pusher->trigger($channel, $event, $data);
-    }
+//     // Function to send a notification
+//    // Function to send a notification
+//     function sendBidNotification($channel, $event, $data) {
+//         global $pusher;
+//         $pusher->trigger($channel, $event, $data);
+//     }
 
-    // Example usage
-    $channel = 'bids';
-    $event = 'new-bid';
-    $data = [
-        'message' => 'A new bid has been placed!',
-        'bid_amount' => 100, // Example data
-    ];
-    sendBidNotification($channel, $event, $data);
+//     // Example usage
+//     $channel = 'bids';
+//     $event = 'new-bid';
+//     $data = [
+//         'message' => 'A new bid has been placed!',
+//         'bid_amount' => 100, // Example data
+//     ];
+//     sendBidNotification($channel, $event, $data);
 
 if(isset($_SESSION['user'])){
     include('backend/conn.php');
@@ -138,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <?php include('links/footerLinks.php'); ?>
-
+<!-- 
 <script>
         var pusher = new Pusher('your_app_key', {
     cluster: 'your_cluster'
@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     alert(data.message); // Display the notification
     console.log('New bid amount: ' + data.bid_amount);
     });
-</script>
+</script> -->
 </body>
 </html>
 <?php

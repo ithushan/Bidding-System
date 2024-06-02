@@ -55,13 +55,15 @@
                 // Check if the query was successful
                 if ($result) {
                     $row = mysqli_fetch_assoc($result);
+                    echo json_encode($row);
+                    
                 } else {
                     echo "Error executing the query: " . mysqli_error($conn);
                 }
             }
         ?>
         <?php
-        if(isset($row)) {
+        // if(isset($row)) {
         ?>
         <div class="row">
         <div class="col-md-6">
@@ -139,7 +141,7 @@
                     closedir($dh);
                 }
             }
-        }
+        // }
         ?>
         </div>
     </section>
