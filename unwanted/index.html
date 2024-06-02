@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>notification</title>
+</head>
+<body>
+ <button>Click here</button>
+
+<script type="text/javascript">
+	const btn = document.querySelector("button");
+	const notify = 0;
+	btn.addEventListener("click", () => {
+		Notification.requestPermission().then(perm => {
+			// alert(perm);
+			if (perm === "granted") {
+	            try {
+	               const notify =  new Notification("Example Notification", {
+						body: "this is bode of notfication",
+						data:{hello: "world"},
+						icon: "logo.png",
+						// tag:"Wellcome Message"
+					})
+					// Add event listener to the notification
+					notify.addEventListener("click", e => {
+						console.log("Notification clicked", e);
+					});
+	            } catch (err) {
+	                console.error("Error displaying notification:", err);
+	            }
+			}
+			
+		})
+	})
+</script>
+
+</body>
+</html>

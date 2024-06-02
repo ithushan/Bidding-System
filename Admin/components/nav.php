@@ -11,9 +11,11 @@
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a class="nav-link" href="Admin.php">Home</a>
+            <a class="nav-link <?php if(basename($_SERVER['PHP_SELF']) == 'Admin.php') echo 'active'; ?>" href="Admin.php">Home</a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link <?php if(basename($_SERVER['PHP_SELF']) == 'usersList.php') echo 'active'; ?>" href="usersList.php">Users</a>
+          </li>
           <!-- <li class="nav-item">
             <a class="nav-link" href="requestProducts.php">Products</a>
           </li> -->
@@ -27,14 +29,18 @@
           <!-- <li class="nav-item">
             <a class="nav-link " href="contact.php">Contact</a>
           </li> -->
+          <?php
+            $currentPage = basename($_SERVER['PHP_SELF']);
+            $activePages = ['requestProducts.php', 'approvedProducts.php', 'rejectedProducts.php'];
+          ?>
          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle <?php if (in_array($currentPage, $activePages)) echo 'active'; ?>" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Products
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class=" dropdown-item" href="requestProducts.php">Pending Requests</a>
-                <a class=" dropdown-item" href="approvedProducts.php"> Approved Products</a>
-                <a class=" dropdown-item" href="rejectedProducts.php">Rejected Products</a>
+                <a class="dropdown-item <?php if ($currentPage == 'requestProducts.php') echo 'active'; ?>" href="requestProducts.php">Pending Requests</a>
+                <a class="dropdown-item <?php if ($currentPage == 'approvedProducts.php') echo 'active'; ?>" href="approvedProducts.php">Approved Products</a>
+                <a class="dropdown-item <?php if ($currentPage == 'rejectedProducts.php') echo 'active'; ?>" href="rejectedProducts.php">Rejected Products</a>
             </div>
         </li>
           <li class="nav-item">
