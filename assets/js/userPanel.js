@@ -15,6 +15,7 @@ panel_pay.addEventListener('click', function(){
 })
 
 panel_sell.addEventListener('click', function(){
+    // console.log("clicked");
     swal("Bidding section", "", "");
     window.location.href = 'sell.php';
 })
