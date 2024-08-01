@@ -10,8 +10,9 @@
 
 <body>
     <?php include("links/nav.php"); ?>
+
     <section class="container section-t8">
-        <nav aria-label="breadcrumb" class="mt-2">
+        <nav aria-label="breadcrumb" class="mt-5">
             <ol class="breadcrumb fs-5">
                 <li class="breadcrumb-item"><a href="index.php">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Account</li>
@@ -112,6 +113,7 @@
     <?php include("links/footerLinks.php"); ?>
 
     <script>
+        // img showing 
         function previewImage(input) {
             var preview = document.getElementById('imagePreview');
             var file = input.files[0];

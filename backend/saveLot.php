@@ -27,6 +27,8 @@ function resizeImage($imagePath, $width, $height){
         case IMAGETYPE_GIF:
             $source = imagecreatefromgif($imagePath);
             break;
+        default:
+            return false;
     }
 
     // Resize and save image
@@ -36,6 +38,8 @@ function resizeImage($imagePath, $width, $height){
     // Free memory
     imagedestroy($image);
     imagedestroy($source);
+
+    return true;
 }
 
 if(isset($_SESSION['user'])){
@@ -101,14 +105,26 @@ if(isset($_SESSION['user'])){
     }
 
     if(!$titleCheck){
-        $targetDir = "../uploads/sell/" . $id . "/" . $title . "/";
+        $targetDir = "../uploads/sell/" . $id . "/" .  $title . "/";
+
+        // Check if the target directory is writable
+        if (!is_writable("../uploads/sell/")) {
+            echo "<script>";
+            echo 'swal("Uploads directory is not writable. Please check permissions.", "", "error");';
+            echo "setTimeout(function() { window.location.href = '../newLot.php'; }, 2000);";
+            echo "</script>";
+            exit();
+        }
 
         // Create the target directory if it doesn't exist
         if (!is_dir($targetDir)) {
             if (!mkdir($targetDir, 0777, true)) {
-                // Handle folder creation failure
-                echo "<script>alert('Failed to create product folder.');</script>";
-                echo "<script>window.location.href = '../newLot.php';</script>";
+                // Log the error for debugging
+                error_log("Failed to create directory: $targetDir");
+                echo "<script>";
+                echo 'swal("Failed to create product folder. Please try again later.", "", "error");';
+                echo "setTimeout(function() { window.location.href = '../newLot.php'; }, 2000);";
+                echo "</script>";
                 exit();
             }
         }
@@ -118,7 +134,7 @@ if(isset($_SESSION['user'])){
         $defaultHeight = 400;
 
         $uploadedImages = [];
-        if (isset($_FILES['productImage1']['name'])) {
+        if (isset($_FILES['productImage1']['name']) && $_FILES['productImage1']['error'] == UPLOAD_ERR_OK) {
             $fileName = $_FILES['productImage1']['name'];
             $targetFilePath = $targetDir . "first_image." . pathinfo($fileName, PATHINFO_EXTENSION);
             if (move_uploaded_file($_FILES['productImage1']['tmp_name'], $targetFilePath)) {
@@ -127,7 +143,7 @@ if(isset($_SESSION['user'])){
                 resizeImage($targetFilePath, $defaultWidth, $defaultHeight);
             }
         }
-        if (isset($_FILES['productImage2']['name'])) {
+        if (isset($_FILES['productImage2']['name']) && $_FILES['productImage2']['error'] == UPLOAD_ERR_OK) {
             $fileName = $_FILES['productImage2']['name'];
             $targetFilePath = $targetDir . "second_image." . pathinfo($fileName, PATHINFO_EXTENSION);
             if (move_uploaded_file($_FILES['productImage2']['tmp_name'], $targetFilePath)) {
@@ -136,7 +152,7 @@ if(isset($_SESSION['user'])){
                 resizeImage($targetFilePath, $defaultWidth, $defaultHeight);
             }
         }
-        if (isset($_FILES['productImage3']['name'])) {
+        if (isset($_FILES['productImage3']['name']) && $_FILES['productImage3']['error'] == UPLOAD_ERR_OK) {
             $fileName = $_FILES['productImage3']['name'];
             $targetFilePath = $targetDir . "third_image." . pathinfo($fileName, PATHINFO_EXTENSION);
             if (move_uploaded_file($_FILES['productImage3']['tmp_name'], $targetFilePath)) {

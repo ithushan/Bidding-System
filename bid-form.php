@@ -115,10 +115,13 @@
             } else if (amount < minBid) {
                 swal("The bid amount must be greater than or equal to Rs. " + minBid.toFixed(2), "", "error");
                 return false;
+            }else{
+                swal("The bidding success Rs. " + amount.toFixed(2), "", "success");
+                return true;
             }
 
             // If all checks pass, return true
-            return true;
+            // return true;
         }
     </script>
 </div>

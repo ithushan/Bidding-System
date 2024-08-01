@@ -121,6 +121,7 @@ if(isset($_SESSION['user'])){
                                             echo '<img src="' . $imagePath . '" alt="Product Image" width="100">';
                                         } else {
                                             echo '<p>No image. </p>';
+                                            echo $imageDirectory;
                                         }
                                     ?>
                                 </td>
